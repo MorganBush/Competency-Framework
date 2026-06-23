@@ -53,7 +53,7 @@ function saveDraft(){saveDraftQuiet(); alert('Draft saved locally in this browse
 function restoreBase(){const d=JSON.parse(localStorage.getItem('hgCompetencyDraft')||'{}'); staffName.value=d.staffName||''; managerName.value=d.managerName||''; reviewDate.value=d.reviewDate||reviewDate.value; if(d.role){roleSelect.value=d.role; renderCriteria();}}
 function restoreScores(){const d=JSON.parse(localStorage.getItem('hgCompetencyDraft')||'{}'); if(d.role!==roleSelect.value)return; [...document.querySelectorAll('[data-score]')].forEach((x,i)=>x.value=(d.scores||[])[i]||''); [...document.querySelectorAll('[data-note]')].forEach((x,i)=>x.value=(d.notes||[])[i]||'');}
 function clearDraft(){localStorage.removeItem('hgCompetencyDraft'); location.reload();}
-tryLoadExternalData(); buildSummary();
+buildSummary();  /* tryLoadExternalData removed - it was undefined and crashed the page */
 
 /* ===================================================================
    HANSBURY COMPETENCY -- central submission integration (added Rev 3)
@@ -100,33 +100,51 @@ tryLoadExternalData(); buildSummary();
   var staffSel = swap('staffName','Loading staff...');
   var mgrSel   = swap('managerName','Loading managers...');
 
-  function loadPeople(){
+  function applyFramework(d){
+    if(!d || !Array.isArray(d.roles) || !d.roles.length) return false;
+    DATA = d;
+    var cur = roleSelect.value;
+    roleSelect.innerHTML = '<option value="">Select role</option>';
+    d.roles.slice().sort(function(a,b){ return a.role.localeCompare(b.role); })
+      .forEach(function(r){ var o=document.createElement('option'); o.value=r.role; o.textContent=r.role; roleSelect.appendChild(o); });
+    if([].some.call(roleSelect.options,function(o){return o.value===cur;})) roleSelect.value=cur;
+    var lg=document.getElementById('legend');
+    if(lg && Array.isArray(d.scoring)) lg.innerHTML=d.scoring.map(function(s){return '<div><b>'+s.score+'</b><br>'+s.label+'</div>';}).join('');
+    renderCriteria();
+    return true;
+  }
+  function populatePeople(people){
+    if(!Array.isArray(people)){ fillSelect(staffSel,[],'Could not load staff'); fillSelect(mgrSel,[],'Could not load managers'); return; }
+    window.__people=people;
+    var staff=people.map(function(p){return p.staff;}).filter(Boolean).sort();
+    var mgrs=[]; people.forEach(function(p){ if(p.manager && mgrs.indexOf(p.manager)<0) mgrs.push(p.manager); }); mgrs.sort();
+    fillSelect(staffSel,staff,'Select staff member');
+    fillSelect(mgrSel,mgrs,'Select manager');
+    staffSel.addEventListener('change',function(){
+      var p=(window.__people||[]).find(function(x){return x.staff===staffSel.value;});
+      if(!p) return;
+      mgrSel.value=p.manager||'';
+      if(p.role && [].some.call(roleSelect.options,function(o){return o.value===p.role;})){ roleSelect.value=p.role; renderCriteria(); }
+      saveDraftQuiet();
+    });
+  }
+  function loadAll(){
     if(HG_ENDPOINT.indexOf('PASTE_')===0){
       fillSelect(staffSel,[],'Set the endpoint to load staff'); fillSelect(mgrSel,[],'Set the endpoint to load managers'); return;
     }
-    fetch(HG_ENDPOINT + '?list=people&pw=' + encodeURIComponent(HG_PASSWORD))
+    fetch(HG_ENDPOINT + '?list=all&pw=' + encodeURIComponent(HG_PASSWORD))
       .then(function(r){ return r.json(); })
-      .then(function(people){
-        if(!Array.isArray(people)) throw new Error('bad response');
-        window.__people = people;
-        var staff = people.map(function(p){return p.staff;}).filter(Boolean).sort();
-        var mgrs=[]; people.forEach(function(p){ if(p.manager && mgrs.indexOf(p.manager)<0) mgrs.push(p.manager); }); mgrs.sort();
-        fillSelect(staffSel, staff, 'Select staff member');
-        fillSelect(mgrSel, mgrs, 'Select manager');
-        staffSel.addEventListener('change', function(){
-          var p=(window.__people||[]).find(function(x){return x.staff===staffSel.value;});
-          if(!p) return;
-          mgrSel.value=p.manager||'';
-          if(p.role && [].some.call(roleSelect.options,function(o){return o.value===p.role;})){ roleSelect.value=p.role; renderCriteria(); }
-          saveDraftQuiet();
-        });
+      .then(function(j){
+        if(j && j.error) throw new Error(j.error);
+        if(j && j.data) applyFramework(j.data);
+        populatePeople(j ? j.people : null);
       })
       .catch(function(){
-        fillSelect(staffSel,[],'Could not load staff - check Sheet & password');
+        fillSelect(staffSel,[],'Could not load - check Sheet & password');
         fillSelect(mgrSel,[],'Could not load managers');
       });
   }
-  loadPeople();
+  loadAll();
 
   /* 4) Add a "Submit review" button next to Update summary ---------- */
   var ref=document.querySelector('button[onclick="buildSummary()"]');
