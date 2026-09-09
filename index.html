@@ -26,7 +26,7 @@ body{font-size:14px;line-height:1.32}.wrap{padding:20px 18px 40px}.hero{padding:
 </style>
 </head>
 <body><div class="wrap">
-<header class="top"><div style="font-family:'Montserrat',sans-serif;font-size:30px;font-weight:700;letter-spacing:-.02em;color:var(--nero);line-height:1">hansbury group.</div><div class="tag">Competency Framework 2026<br>MVP review calculator<br><span style="font-size:10px;letter-spacing:.16em;color:var(--clay);font-weight:700">VERSION 8</span></div></header>
+<header class="top"><div style="font-family:'Montserrat',sans-serif;font-size:30px;font-weight:700;letter-spacing:-.02em;color:var(--nero);line-height:1">hansbury group.</div><div class="tag">Competency Framework 2026<br>MVP review calculator<br><span style="font-size:10px;letter-spacing:.16em;color:var(--clay);font-weight:700">VERSION 9</span></div></header>
 <section class="hero"><h1>Competency Review Calculator</h1><p>Select a role. The calculator pulls the team, seniority, behaviours, skills, and departmental knowledge criteria from the framework. Managers can score each item and add meeting notes, then print or save as PDF locally.</p></section>
 <section class="panel dataNote"><b>Framework data:</b> This version can load <code>competency_data.json</code> from the same folder when hosted online. If opened locally, use <b>Import data file</b>.</section>
 <section class="panel"><div class="grid"><div class="field"><label>Staff member</label><input id="staffName" placeholder="Enter name"></div><div class="field"><label>Manager</label><input id="managerName" placeholder="Enter manager"></div><div class="field"><label>Role</label><select id="roleSelect"><option value="">Select role</option></select></div><div class="field"><label>Review date</label><input id="reviewDate" type="date"></div></div><div class="meta"><div class="pill"><b>Team</b><span id="teamInfo">-</span></div><div class="pill"><b>Seniority</b><span id="seniorityInfo">-</span></div><div class="pill"><b>Total criteria</b><span id="criteriaCount">0</span></div></div><div class="actions"><button class="btn" onclick="buildSummary()">Update summary</button><button class="btn secondary" onclick="window.print()">Export / Save PDF</button><button class="btn ghost" onclick="saveDraft()">Save local draft</button><button class="btn ghost" onclick="clearDraft()">Clear draft</button><button class="btn ghost" onclick="document.getElementById('dataFile').click()">Import data file</button><input id="dataFile" type="file" accept="application/json" style="display:none"></div></section>
@@ -169,7 +169,18 @@ buildSummary();  /* tryLoadExternalData removed - it was undefined and crashed t
   [].slice.call(document.querySelectorAll('button')).forEach(function(b){
     var t=(b.textContent||'').trim();
     if(t==='Update summary' || t==='Save local draft') b.remove();
+    if(t==='Export / Save PDF') b.onclick=printPdf;
   });
+  function reviewFileName(){
+    var parts=[staffName.value, roleSelect.value, 'Competency Framework', reviewDate.value].filter(Boolean);
+    return (parts.join(' - ').replace(/[\\/:*?"<>|]+/g,' ').replace(/\s+/g,' ').trim()) || 'Competency Framework';
+  }
+  function printPdf(){
+    var prev=document.title;
+    document.title=reviewFileName();
+    window.print();
+    setTimeout(function(){ document.title=prev; }, 1500);
+  }
   function getCount(){
     return jsonp('list=count&pw=' + encodeURIComponent(HG_PASSWORD))
       .then(function(j){ return (j && typeof j.rows === 'number') ? j.rows : null; })
@@ -186,7 +197,7 @@ buildSummary();  /* tryLoadExternalData removed - it was undefined and crashed t
     jsonp('action=submit&pw=' + encodeURIComponent(HG_PASSWORD) + '&data=' + encodeURIComponent(JSON.stringify(payload)))
       .then(function(res){
         setBtns('Submit review',false);
-        if(res && res.ok){ alert('Saved to the sheet. Your PDF copy opens next - choose Save as PDF in the print dialog.'); window.print(); }
+        if(res && res.ok){ alert('Saved to the sheet. The PDF opens next - choose "Save as PDF"; the file name is filled in for you.'); printPdf(); }
         else if(res && res.error){ alert('Not saved: ' + res.error); }
         else { alert('Submitted, but no confirmation came back - check the Submissions tab.'); }
       })
