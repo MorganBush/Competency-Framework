@@ -16,8 +16,8 @@ const HG_PASSWORD = "Hansbury26!";
 </script>
 <!-- =================================================================== -->
 <style>
-:root{--green:#003968;--nero:#1F1D1B;--tundora:#3B3133;--alto:#E4DFD3;--pale:#F4F1EA;--mid:#E4DFD3;--white:#fff;--clay:#B5654A;--stone:#8D8280;}
-*{box-sizing:border-box} body{margin:0;font-family:'Montserrat','Century Gothic',sans-serif;background:var(--pale);color:var(--nero);font-size:15px;line-height:1.45} .wrap{max-width:1180px;margin:0 auto;padding:28px 22px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:28px}.logo{width:280px;max-width:55vw;height:auto}.tag{color:var(--tundora);text-align:right}.hero{background:var(--white);border:1px solid var(--alto);border-top:3px solid var(--clay);border-radius:16px;padding:30px;box-shadow:0 12px 30px rgba(31,29,27,.05);margin-bottom:18px}.hero h1{font-size:38px;line-height:1.06;letter-spacing:-.02em;margin:0 0 10px;color:var(--green);font-weight:700}.hero p{max-width:820px;margin:0;color:var(--tundora)}.panel{background:var(--white);border:1px solid var(--alto);border-radius:16px;padding:22px;margin:18px 0;box-shadow:0 10px 25px rgba(39,39,39,.04)}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--stone);font-weight:600;margin:0 0 7px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--alto);border-radius:12px;padding:12px 13px;background:#fff;color:var(--nero);font:inherit}.field input[readonly]{background:var(--pale);color:var(--tundora)}.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.pill{border-radius:14px;background:var(--pale);border:1px solid var(--mid);padding:12px}.pill b{display:block;color:var(--green);font-size:13px}.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}.btn{border:none;border-radius:999px;padding:11px 17px;font-weight:700;cursor:pointer;background:var(--green);color:#fff}.btn.secondary{background:var(--nero)}.btn.ghost{background:#fff;color:var(--green);border:1px solid var(--green)}.sectionTitle{display:flex;justify-content:space-between;gap:16px;align-items:end;margin:30px 0 12px}.sectionTitle h2{margin:0;color:var(--green);font-size:24px}.sectionTitle span{color:var(--tundora);font-size:13px}.competency{background:#fff;border:1px solid var(--alto);border-radius:16px;padding:18px;margin-bottom:12px}.compHead{display:grid;grid-template-columns:220px 1fr 100px;gap:16px;align-items:start}.compHead h3{margin:0;color:var(--nero);font-size:17px}.cat{font-size:11px;color:var(--stone);font-weight:600;text-transform:uppercase;letter-spacing:.14em;margin-bottom:5px}.criteria{color:var(--tundora);margin:0}.score select{padding:10px}.notes{margin-top:14px}.notes textarea{min-height:76px;resize:vertical}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.scorebox{background:var(--pale);border:1px solid var(--mid);border-radius:16px;padding:16px}.scorebox strong{display:block;font-size:28px;color:var(--clay);font-weight:700}.scorebox span{color:var(--tundora)}.legend{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.legend div{background:var(--pale);border:1px solid var(--mid);border-radius:12px;padding:10px;font-size:12px}.empty{padding:30px;border:1px dashed var(--alto);border-radius:14px;color:var(--tundora);text-align:center;background:#fff}.bottomControls{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}.printHeader{display:none}@media(max-width:850px){.grid,.meta,.summary,.legend{grid-template-columns:1fr}.compHead{grid-template-columns:1fr}.tag{text-align:left}.top{align-items:flex-start;flex-direction:column}.logo{width:240px}}@media print{body{background:#fff}.wrap{max-width:none;padding:0}.top,.hero p,.actions,.bottomControls,.btn{display:none}.hero,.panel,.competency{box-shadow:none;border-color:#bbb;break-inside:avoid}.hero{padding:0 0 10px;border:none}.hero h1{font-size:24px}.printHeader{display:block;margin-bottom:16px}.notes textarea,.field input,.field select{border:none;padding:0}textarea{min-height:50px}.competency{page-break-inside:avoid}.sectionTitle{margin-top:18px}}
+:root{--green:#003968;--nero:#1F1D1B;--tundora:#3B3133;--alto:#D3CCBD;--pale:#F4F1EA;--mid:#E4DFD3;--white:#fff;--clay:#B5654A;--stone:#8D8280;}
+*{box-sizing:border-box} body{margin:0;font-family:'Montserrat','Century Gothic',sans-serif;background:var(--pale);color:var(--nero);font-size:14px;line-height:1.4} .wrap{max-width:1180px;margin:0 auto;padding:16px 18px 44px}.top{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:28px}.logo{width:280px;max-width:55vw;height:auto}.tag{color:var(--tundora);text-align:right}.hero{background:var(--white);border:1px solid var(--alto);border-top:3px solid var(--clay);border-radius:10px;padding:18px 20px;box-shadow:0 6px 18px rgba(31,29,27,.06);margin-bottom:12px}.hero h1{font-size:27px;line-height:1.08;letter-spacing:-.02em;margin:0 0 6px;color:var(--green);font-weight:700}.hero p{max-width:820px;margin:0;color:var(--tundora)}.panel{background:var(--white);border:1px solid var(--alto);border-radius:10px;padding:15px 16px;margin:12px 0;box-shadow:0 4px 14px rgba(31,29,27,.05)}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--nero);font-weight:700;margin:0 0 5px}.field input,.field select,.field textarea{width:100%;border:1.5px solid #C4BCAB;border-radius:8px;padding:9px 11px;background:#fff;color:var(--nero);font:inherit}.field input[readonly]{background:var(--pale);color:var(--tundora)}.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}.pill{border-radius:8px;background:var(--pale);border:1px solid var(--alto);padding:10px 11px}.pill b{display:block;color:var(--green);font-size:13px}.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}.btn{border:none;border-radius:8px;padding:10px 15px;font-weight:700;cursor:pointer;background:var(--green);color:#fff;font-size:13.5px}.btn.submit{background:var(--clay)}.btn.submit:hover{background:#8E4B34}.btn.secondary{background:var(--nero)}.btn.ghost{background:#fff;color:var(--green);border:1px solid var(--green)}.sectionTitle{display:flex;justify-content:space-between;gap:16px;align-items:end;margin:20px 0 8px;border-bottom:1px solid var(--alto);padding-bottom:6px}.sectionTitle h2{margin:0;color:var(--green);font-size:19px}.sectionTitle span{color:var(--tundora);font-size:13px}.competency{background:#fff;border:1px solid var(--alto);border-radius:9px;padding:12px 13px;margin-bottom:8px}.compHead{display:grid;grid-template-columns:200px 1fr 92px;gap:12px;align-items:start}.compHead h3{margin:0;color:var(--nero);font-size:15px}.cat{font-size:11px;color:var(--stone);font-weight:600;text-transform:uppercase;letter-spacing:.14em;margin-bottom:5px}.criteria{color:var(--tundora);margin:0}.score select{padding:10px}.notes{margin-top:10px}.notes textarea{min-height:58px;resize:vertical}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.scorebox{background:var(--pale);border:1px solid var(--alto);border-radius:9px;padding:12px}.scorebox strong{display:block;font-size:22px;color:var(--clay);font-weight:700}.scorebox span{color:var(--tundora)}.legend{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.legend div{background:var(--pale);border:1px solid var(--alto);border-radius:8px;padding:8px 9px;font-size:11px}.empty{padding:30px;border:1px dashed var(--alto);border-radius:14px;color:var(--tundora);text-align:center;background:#fff}.bottomControls{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}.printHeader{display:none}@media(max-width:850px){.grid,.meta,.summary,.legend{grid-template-columns:1fr}.compHead{grid-template-columns:1fr}.tag{text-align:left}.top{align-items:flex-start;flex-direction:column}.logo{width:240px}}@media print{body{background:#fff}.wrap{max-width:none;padding:0}.top,.hero p,.actions,.bottomControls,.btn{display:none}.hero,.panel,.competency{box-shadow:none;border-color:#bbb;break-inside:avoid}.hero{padding:0 0 10px;border:none}.hero h1{font-size:24px}.printHeader{display:block;margin-bottom:16px}.notes textarea,.field input,.field select{border:none;padding:0}textarea{min-height:50px}.competency{page-break-inside:avoid}.sectionTitle{margin-top:18px}}
 </style>
 
 <style id="compactOverrides">
@@ -101,6 +101,18 @@ buildSummary();  /* tryLoadExternalData removed - it was undefined and crashed t
   var staffSel = swap('staffName','Loading staff...');
   var mgrSel   = swap('managerName','Loading managers...');
 
+  function jsonp(params){
+    return new Promise(function(resolve, reject){
+      var cb = '__hg_' + Math.random().toString(36).slice(2);
+      var s = document.createElement('script');
+      var t = setTimeout(function(){ done(); reject(new Error('timeout')); }, 15000);
+      function done(){ try{ delete window[cb]; }catch(e){ window[cb]=undefined; } if(s.parentNode) s.parentNode.removeChild(s); clearTimeout(t); }
+      window[cb] = function(data){ done(); resolve(data); };
+      s.onerror = function(){ done(); reject(new Error('load error')); };
+      s.src = HG_ENDPOINT + '?' + params + '&callback=' + cb;
+      document.head.appendChild(s);
+    });
+  }
   function applyFramework(d){
     if(!d || !Array.isArray(d.roles) || !d.roles.length) return false;
     DATA = d;
@@ -133,8 +145,7 @@ buildSummary();  /* tryLoadExternalData removed - it was undefined and crashed t
     if(HG_ENDPOINT.indexOf('PASTE_')===0){
       fillSelect(staffSel,[],'Set the endpoint to load staff'); fillSelect(mgrSel,[],'Set the endpoint to load managers'); return;
     }
-    fetch(HG_ENDPOINT + '?list=all&pw=' + encodeURIComponent(HG_PASSWORD))
-      .then(function(r){ return r.json(); })
+    jsonp('list=all&pw=' + encodeURIComponent(HG_PASSWORD))
       .then(function(j){
         if(j && j.error) throw new Error(j.error);
         if(j && j.data) applyFramework(j.data);
@@ -147,42 +158,41 @@ buildSummary();  /* tryLoadExternalData removed - it was undefined and crashed t
   }
   loadAll();
 
-  /* 4) Add a "Submit review" button next to Update summary ---------- */
-  var ref=document.querySelector('button[onclick="buildSummary()"]');
-  var send=document.createElement('button'); send.className='btn'; send.textContent='Submit review';
+  /* 4) Buttons: drop redundant ones, add Clay Submit top and bottom -- */
+  [].slice.call(document.querySelectorAll('button')).forEach(function(b){
+    var t=(b.textContent||'').trim();
+    if(t==='Update summary' || t==='Save local draft') b.remove();
+  });
   function getCount(){
-    return fetch(HG_ENDPOINT + '?list=count&pw=' + encodeURIComponent(HG_PASSWORD))
-      .then(function(r){ return r.json(); })
+    return jsonp('list=count&pw=' + encodeURIComponent(HG_PASSWORD))
       .then(function(j){ return (j && typeof j.rows === 'number') ? j.rows : null; })
       .catch(function(){ return null; });
   }
-  send.onclick=function(){
+  function submitReview(){
     if(!staffName.value || !managerName.value || !roleSelect.value){ alert('Pick staff, manager and role before submitting.'); return; }
-    if(HG_ENDPOINT.indexOf('PASTE_')===0){ alert('Endpoint not configured yet - paste the Apps Script URL into HG_ENDPOINT.'); return; }
-    var payload=draftObj();
-    payload.pw=HG_PASSWORD;
-    payload.submittedAt=new Date().toISOString();
+    if(HG_ENDPOINT.indexOf('PASTE_')===0){ alert('Endpoint not configured yet.'); return; }
+    var btns=[].slice.call(document.querySelectorAll('.btn.submit'));
+    function setBtns(txt,dis){ btns.forEach(function(b){ b.textContent=txt; b.disabled=dis; }); }
+    var payload=draftObj(); payload.pw=HG_PASSWORD; payload.submittedAt=new Date().toISOString();
     try{ payload.items=getItems().map(function(it){return it.title;}); }catch(e){}
-    send.disabled=true; send.textContent='Submitting...';
+    setBtns('Submitting...',true);
     getCount().then(function(before){
       return fetch(HG_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)})
         .then(function(){ return new Promise(function(res){ setTimeout(res,1000); }); })
         .then(getCount)
         .then(function(after){
-          send.disabled=false; send.textContent='Submit review';
-          if(before!==null && after!==null && after>before){
-            alert('Saved to the sheet. Your PDF copy opens next - choose Save as PDF in the print dialog.');
-            window.print();
-          } else if(before===null || after===null){
-            alert('Submitted, but the save could not be auto-confirmed. Check the Submissions tab. Your PDF copy opens next.');
-            window.print();
-          } else {
-            alert('NOT saved - the row did not reach the sheet. The Apps Script likely needs re-deploying: Deploy > Manage deployments > edit > New version > Deploy.');
-          }
+          setBtns('Submit review',false);
+          if(before!==null && after!==null && after>before){ alert('Saved to the sheet. Your PDF copy opens next - choose Save as PDF in the print dialog.'); window.print(); }
+          else if(before===null || after===null){ alert('Submitted, but the save could not be auto-confirmed. Check the Submissions tab. Your PDF copy opens next.'); window.print(); }
+          else { alert('NOT saved - the row did not reach the sheet. The Apps Script likely needs re-deploying: Deploy > Manage deployments > edit > New version > Deploy.'); }
         });
-    }).catch(function(){ send.disabled=false; send.textContent='Submit review'; alert('Submit failed - check your connection and try again.'); });
-  };
-  if(ref && ref.parentNode) ref.parentNode.insertBefore(send, ref); else document.body.appendChild(send);
+    }).catch(function(){ setBtns('Submit review',false); alert('Submit failed - check your connection and try again.'); });
+  }
+  [document.querySelector('.actions'), document.querySelector('.bottomControls')].forEach(function(bar){
+    if(!bar) return;
+    var b=document.createElement('button'); b.className='btn submit'; b.textContent='Submit review'; b.onclick=submitReview;
+    bar.insertBefore(b, bar.firstChild);
+  });
 })();
 
 </script></body></html>
