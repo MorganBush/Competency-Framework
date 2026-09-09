@@ -173,20 +173,16 @@ buildSummary();  /* tryLoadExternalData removed - it was undefined and crashed t
     if(HG_ENDPOINT.indexOf('PASTE_')===0){ alert('Endpoint not configured yet.'); return; }
     var btns=[].slice.call(document.querySelectorAll('.btn.submit'));
     function setBtns(txt,dis){ btns.forEach(function(b){ b.textContent=txt; b.disabled=dis; }); }
-    var payload=draftObj(); payload.pw=HG_PASSWORD; payload.submittedAt=new Date().toISOString();
-    try{ payload.items=getItems().map(function(it){return it.title;}); }catch(e){}
+    var payload=draftObj(); payload.submittedAt=new Date().toISOString();
     setBtns('Submitting...',true);
-    getCount().then(function(before){
-      return fetch(HG_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)})
-        .then(function(){ return new Promise(function(res){ setTimeout(res,1000); }); })
-        .then(getCount)
-        .then(function(after){
-          setBtns('Submit review',false);
-          if(before!==null && after!==null && after>before){ alert('Saved to the sheet. Your PDF copy opens next - choose Save as PDF in the print dialog.'); window.print(); }
-          else if(before===null || after===null){ alert('Submitted, but the save could not be auto-confirmed. Check the Submissions tab. Your PDF copy opens next.'); window.print(); }
-          else { alert('NOT saved - the row did not reach the sheet. The Apps Script likely needs re-deploying: Deploy > Manage deployments > edit > New version > Deploy.'); }
-        });
-    }).catch(function(){ setBtns('Submit review',false); alert('Submit failed - check your connection and try again.'); });
+    jsonp('action=submit&pw=' + encodeURIComponent(HG_PASSWORD) + '&data=' + encodeURIComponent(JSON.stringify(payload)))
+      .then(function(res){
+        setBtns('Submit review',false);
+        if(res && res.ok){ alert('Saved to the sheet. Your PDF copy opens next - choose Save as PDF in the print dialog.'); window.print(); }
+        else if(res && res.error){ alert('Not saved: ' + res.error); }
+        else { alert('Submitted, but no confirmation came back - check the Submissions tab.'); }
+      })
+      .catch(function(){ setBtns('Submit review',false); alert('Submit failed - check your connection and try again.'); });
   }
   [document.querySelector('.actions'), document.querySelector('.bottomControls')].forEach(function(bar){
     if(!bar) return;
